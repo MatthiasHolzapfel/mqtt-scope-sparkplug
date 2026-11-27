@@ -43,7 +43,7 @@ export function panelView(state, { confirm = null } = {}) {
   const { status, kind, latest } = state;
   const hasNotes = typeof latest.notes === 'string' && latest.notes.trim() !== '';
   const view = {
-    title: `MQTT Scope ${latest.version}`,
+    title: `MQTT_Lab ${latest.version}`,
     current: `You have ${state.current}`,
     notes: hasNotes ? latest.notes : 'No release notes.',
     noNotes: !hasNotes,
@@ -89,9 +89,9 @@ export function panelView(state, { confirm = null } = {}) {
 export function installingView(state) {
   if (state?.status !== 'installing' || !state.latest || !SELF_UPDATING_KINDS.has(state.kind)) return null;
   return {
-    title: `Installing MQTT Scope ${state.latest.version}`,
+    title: `Installing MQTT_Lab ${state.latest.version}`,
     // The Windows installer shows its own progress window once this app has closed.
-    text: state.kind === 'nsis' ? 'MQTT Scope closes now. The installer shows its progress, then MQTT Scope opens again.' : 'MQTT Scope restarts in a moment.',
+    text: state.kind === 'nsis' ? 'MQTT_Lab closes now. The installer shows its progress, then MQTT_Lab opens again.' : 'MQTT_Lab restarts in a moment.',
   };
 }
 

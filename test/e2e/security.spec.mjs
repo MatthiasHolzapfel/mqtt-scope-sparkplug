@@ -40,7 +40,7 @@ test('markup in topics and payloads is never executed (tree, inspector modes, hi
   await expect(page.locator('.conn-dialog .conn-name')).toHaveText([IMG]);
   await connect(page);
   await expect(activeTabName(page)).toHaveText(IMG);
-  await expect(page).toHaveTitle(`MQTT Scope — ${IMG}`);
+  await expect(page).toHaveTitle(`MQTT_Lab — ${IMG}`);
   await waitForTopic(page, `xss/${SCRIPT}`);
 
   // Tree: names and values are text.

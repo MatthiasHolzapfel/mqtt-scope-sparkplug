@@ -6,6 +6,37 @@ All notable changes to MQTT Scope. The format follows
 
 ## [Unreleased]
 
+## [0.5.1] - 2026-11-27
+
+First release of **MQTT_Lab**, a fork of MQTT Scope 0.5.0 with Sparkplug B
+decoding.
+
+### Changed
+
+- **Renamed to MQTT_Lab.** It installs as its own app (app ID
+  `io.github.matthiasholzapfel.mqtt-lab`) next to an installed MQTT Scope, with
+  its own settings and connection profiles. Installers are named
+  `MQTT_Lab-<version>-…`.
+- **Updates come from this fork.** The update check and the in-app updater
+  read the releases of `MatthiasHolzapfel/mqtt-scope-sparkplug`, so MQTT_Lab
+  is never replaced by an MQTT Scope release.
+- The Arch Linux (AUR) package and the website of MQTT Scope are not built or
+  published from this fork.
+
+### Added
+
+- **Sparkplug B decoding.** Messages on `spBv1.0/<group>/<type>/<node>[/<device>]`
+  topics are decoded from protobuf and shown as JSON in the Tree, Text and Diff
+  views, searched, and offered in the plot picker. Message types ending in
+  BIRTH, DEATH, DATA or CMD are decoded, including prefixed variants such as
+  `LDDATA`. Metrics are listed with their `name`, so a picked metric is
+  plotted by name and keeps following it when the order changes or a message
+  reports only some metrics. Metrics sent by alias get their names and types
+  from the node's or device's last BIRTH. Floats are shown in their shortest
+  form (36.1, not 36.099998…); 64-bit integers that do not fit a number are
+  kept exact as text. Raw shows the protobuf bytes, *Save* writes them as
+  `.bin`, and loading such a message into the publisher loads it as hex.
+
 ## [0.5.0] - 2026-11-20
 
 ### Added

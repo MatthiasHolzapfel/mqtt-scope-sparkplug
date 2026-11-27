@@ -66,7 +66,7 @@ function menuTemplate({ isMac, shortcuts = {}, act }) {
           submenu: [
             { label: 'Keyboard Shortcuts…', click: send('keyboardSettings') },
             { label: 'Check for Updates…', click: () => act.checkForUpdates() },
-            { label: 'About MQTT Scope', click: () => act.about() },
+            { label: 'About MQTT_Lab', click: () => act.about() },
             { label: 'Show Log File', click: () => act.showLogFile() },
           ],
         },

@@ -194,7 +194,7 @@ export function openSettings(api, current, { tab = 'general', openUpdatePanel = 
     // Footer: the version and what the native menu bar used to hold (there is
     // no menu bar on Linux and Windows). Main knows every path and URL.
     const version = el('span', 'settings-version');
-    api.updateState().then((u) => u?.current && (version.textContent = `MQTT Scope ${u.current}`), () => {});
+    api.updateState().then((u) => u?.current && (version.textContent = `MQTT_Lab ${u.current}`), () => {});
     const link = (label, title, run) => button(label, title, run, 'btn small');
     // Runs a footer action that answers '' or why it failed.
     const opens = (what, ask) => async () => {
@@ -228,7 +228,7 @@ export function openSettings(api, current, { tab = 'general', openUpdatePanel = 
         if (!overlay.isConnected || !unsaved()) {
           done(null);
           openUpdatePanel(state);
-        } else toast(`${state?.latest ? `MQTT Scope ${state.latest.version}` : 'A newer MQTT Scope'} is available — the Update button is in the top bar`);
+        } else toast(`${state?.latest ? `MQTT_Lab ${state.latest.version}` : 'A newer MQTT_Lab'} is available — the Update button is in the top bar`);
       }
     };
     const footerLinks = el('div', 'settings-links');

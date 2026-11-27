@@ -359,7 +359,7 @@ function refresh() {
   const current = activeTab();
   strip.render(stripTabs().map((t) => ({ id: t.connId, label: t.label, state: dotState(t.status, t.everConnected), active: t === current, repeating: t.repeating })));
   if (current) {
-    document.title = `MQTT Scope — ${current.label}`;
+    document.title = `MQTT_Lab — ${current.label}`;
     if (current.status !== dialogStatus) {
       dialogStatus = current.status;
       connections.onStatus(current.status);

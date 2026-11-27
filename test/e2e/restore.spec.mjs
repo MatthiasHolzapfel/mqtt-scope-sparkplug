@@ -59,10 +59,10 @@ async function connectTo(page, name) {
 }
 
 // The main window whose active tab is `name` (its title follows that tab).
-const boundsOf = (app, name) => app.evaluate(({ BrowserWindow }, n) => BrowserWindow.getAllWindows().find((w) => w.getTitle() === `MQTT Scope — ${n}`).getNormalBounds(), name);
+const boundsOf = (app, name) => app.evaluate(({ BrowserWindow }, n) => BrowserWindow.getAllWindows().find((w) => w.getTitle() === `MQTT_Lab — ${n}`).getNormalBounds(), name);
 const setBounds = (app, name, bounds) =>
-  app.evaluate(({ BrowserWindow }, [n, b]) => BrowserWindow.getAllWindows().find((w) => w.getTitle() === `MQTT Scope — ${n}`).setBounds(b), [name, bounds]);
-const closeWindow = (app, name) => app.evaluate(({ BrowserWindow }, n) => BrowserWindow.getAllWindows().find((w) => w.getTitle() === `MQTT Scope — ${n}`).close(), name);
+  app.evaluate(({ BrowserWindow }, [n, b]) => BrowserWindow.getAllWindows().find((w) => w.getTitle() === `MQTT_Lab — ${n}`).setBounds(b), [name, bounds]);
+const closeWindow = (app, name) => app.evaluate(({ BrowserWindow }, n) => BrowserWindow.getAllWindows().find((w) => w.getTitle() === `MQTT_Lab — ${n}`).close(), name);
 
 // Answers every native message box with the button labelled `label` and
 // records what it asked.
@@ -219,11 +219,11 @@ test('a maximized or full-screen window comes back so, at its normal bounds', as
   await setBounds(app, 'Broker A', boundsA);
   await setBounds(app, 'Broker B', boundsB);
   const shape = (n) => app.evaluate(({ BrowserWindow }, t) => {
-    const w = BrowserWindow.getAllWindows().find((x) => x.getTitle() === `MQTT Scope — ${t}`);
+    const w = BrowserWindow.getAllWindows().find((x) => x.getTitle() === `MQTT_Lab — ${t}`);
     return { maximized: w.isMaximized(), fullScreen: w.isFullScreen() };
   }, n);
   await app.evaluate(({ BrowserWindow }) => {
-    const byTitle = (t) => BrowserWindow.getAllWindows().find((w) => w.getTitle() === `MQTT Scope — ${t}`);
+    const byTitle = (t) => BrowserWindow.getAllWindows().find((w) => w.getTitle() === `MQTT_Lab — ${t}`);
     byTitle('Broker A').maximize();
     byTitle('Broker B').setFullScreen(true);
   });

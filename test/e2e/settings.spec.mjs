@@ -127,7 +127,7 @@ test('settings: footer shows the running app version', async ({ env }) => {
   const { page } = await env.connected(broker);
   await page.locator('#btn-settings').click();
   const footer = settingsDialog(page).locator('.settings-version');
-  await expect(footer).toHaveText(`MQTT Scope ${version}`);
+  await expect(footer).toHaveText(`MQTT_Lab ${version}`);
   // Visible on every tab, below the tab content.
   await settingsDialog(page).locator('.tab[data-tab="keyboard"]').click();
   await expect(footer).toBeVisible();

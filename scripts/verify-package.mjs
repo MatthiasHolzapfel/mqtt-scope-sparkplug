@@ -18,8 +18,8 @@ function findExecutable() {
   const dirs = readdirSync('dist');
   const pick = (re, rel) => dirs.filter((d) => re.test(d)).map((d) => path.join('dist', d, rel)).find(existsSync);
   if (process.platform === 'linux') return pick(/^linux(-\w+)?-unpacked$/, 'mqtt-scope');
-  if (process.platform === 'win32') return pick(/^win(-\w+)?-unpacked$/, 'MQTT Scope.exe');
-  return pick(/^mac(-\w+)?$/, 'MQTT Scope.app/Contents/MacOS/MQTT Scope');
+  if (process.platform === 'win32') return pick(/^win(-\w+)?-unpacked$/, 'MQTT_Lab.exe');
+  return pick(/^mac(-\w+)?$/, 'MQTT_Lab.app/Contents/MacOS/MQTT_Lab');
 }
 const exe = process.argv[2] || findExecutable();
 if (!exe || !existsSync(exe)) {

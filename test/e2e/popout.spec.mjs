@@ -98,7 +98,7 @@ test('the Close tab key (Ctrl+W) and File → Close Tab close a pop-out in front
   expect(await windowCount()).toBe(1);
   expect(await tabStates()).toEqual(['connected']);
   // With the main window in front it closes the tab (a New connection tab takes its place).
-  await menuCloseTab(app, `MQTT Scope — Test broker ${broker.port}`);
+  await menuCloseTab(app, `MQTT_Lab — Test broker ${broker.port}`);
   await expect.poll(() => page.evaluate(() => window.__mqttscope.shell.tabs.map((t) => t.mode))).toEqual(['picker']);
   expect(errors).toEqual([]);
   expect(popupErrors).toEqual([]);

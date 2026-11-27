@@ -413,7 +413,7 @@ test('a failed connect keeps the dialog with the error; Connect retries', async 
   await expect(dlg).toBeVisible();
   await expect(button).toHaveText('Retry');
   await expect(activeTabName(page)).toHaveText('Down');
-  await expect(page).toHaveTitle('MQTT Scope — Down');
+  await expect(page).toHaveTitle('MQTT_Lab — Down');
   await expect(tabEl(page, id)).toHaveAttribute('data-state', /^(connecting|error)$/);
   expect(await mode(page)).toBe('picker');
   await expect(toast(page, 'error')).toHaveCount(0);
@@ -760,7 +760,7 @@ test('editing an open profile asks for a reconnect; renaming renames the tab', a
   await field('name').fill('Renamed A');
   await tabEl(page, idA).click();
   await expect(activeTabName(page)).toHaveText('Renamed A');
-  await expect(page).toHaveTitle('MQTT Scope — Renamed A');
+  await expect(page).toHaveTitle('MQTT_Lab — Renamed A');
   await expect(hint).toBeHidden();
 
   // A change to how it connects does.

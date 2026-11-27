@@ -236,7 +236,7 @@ test('a tab moves with its connection; messages published during the move all ar
   // Window 2 shows it in first place; window 1 shows tab B.
   expect(await tabIds(w2.page)).toEqual([idA, idC]);
   await expect(activeTabName(w2.page)).toHaveText('Broker A');
-  await expect(w2.page).toHaveTitle('MQTT Scope — Broker A');
+  await expect(w2.page).toHaveTitle('MQTT_Lab — Broker A');
   expect(await tabIds(w1)).toEqual([idB]);
   await expect(activeTabName(w1)).toHaveText('Broker B');
 

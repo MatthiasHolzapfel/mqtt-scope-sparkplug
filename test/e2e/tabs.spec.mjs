@@ -141,7 +141,7 @@ test('closing the last tab leaves a fresh tab', async ({ env }) => {
   await expect(activeTabName(page)).toHaveText('New connection');
   await expect(page.locator('.conn-tab.active')).toHaveAttribute('data-state', 'new');
   await expect(page.locator('.conn-dialog')).toBeVisible();
-  await expect(page).toHaveTitle('MQTT Scope — New connection');
+  await expect(page).toHaveTitle('MQTT_Lab — New connection');
   expect(await dialogCalls(app)).toEqual([]);
   expect(await app.evaluate(() => globalThis.__mqttscopeConnections.size)).toBe(1);
   expect(errors).toEqual([]);
@@ -149,12 +149,12 @@ test('closing the last tab leaves a fresh tab', async ({ env }) => {
 
 test('the window title follows the active tab', async ({ env }) => {
   const { idA, page, errors } = await twoTabs(env);
-  await expect(page).toHaveTitle('MQTT Scope — Broker B');
+  await expect(page).toHaveTitle('MQTT_Lab — Broker B');
   await tabEl(page, idA).click();
-  await expect(page).toHaveTitle('MQTT Scope — Broker A');
+  await expect(page).toHaveTitle('MQTT_Lab — Broker A');
   await page.locator('.tab-new').click();
   await expect(page.locator('.conn-dialog')).toBeVisible();
-  await expect(page).toHaveTitle('MQTT Scope — New connection');
+  await expect(page).toHaveTitle('MQTT_Lab — New connection');
   await expect(page.locator('.conn-tab .conn-tab-name')).toHaveText(['Broker A', 'Broker B', 'New connection']);
   expect(errors).toEqual([]);
 });

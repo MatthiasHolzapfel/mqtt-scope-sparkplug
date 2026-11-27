@@ -2,6 +2,7 @@
 // received messages keep the latest message plus a bounded history.
 
 import { plainMessage } from './payload.js';
+import { AliasRegistry } from './sparkplug.js';
 
 const collator = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' });
 
@@ -49,6 +50,8 @@ export class TopicTree {
 
   clear() {
     this.root = new TopicNode('', null);
+    // Sparkplug B metric aliases, learned from BIRTH messages as they arrive.
+    this.sparkplug = new AliasRegistry();
     this.topicCount = 0;
     this.messageCount = 0;
   }
@@ -69,6 +72,7 @@ export class TopicTree {
   }
 
   addMessage(msg) {
+    if (msg.topic.startsWith('spBv1.0/')) this.sparkplug.note(msg);
     const node = this.nodeFor(msg.topic);
     const isNewTopic = node.messageCount === 0;
     node.message = msg;

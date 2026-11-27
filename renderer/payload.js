@@ -2,6 +2,7 @@
 // Node for tests as well as in the renderer.
 
 import { getAt } from './jsonPath.js';
+import { decodeMessage, summary } from './sparkplug.js';
 
 const utf8 = new TextDecoder('utf-8', { fatal: true });
 const HIGHLIGHT_LIMIT = 1_500_000;
@@ -18,10 +19,19 @@ const BINARY_CHARS = /[\u0000-\u0008\u000B\u000C\u000E-\u001F]/;
 
 // Returns { kind: 'empty'|'json'|'number'|'text'|'binary', text, value, size }.
 // The result is cached on the message object.
+// Sparkplug B payloads (topics under spBv1.0/) decode to JSON with
+// `sparkplug` set to the message type, so every JSON view, the plot picker and
+// the plots work on their metrics.
 export function decode(msg) {
   if (msg._decoded) return msg._decoded;
-  msg._decoded = decodeBytes(msg.payload);
+  const sp = decodeMessage(msg);
+  msg._decoded = sp ? sparkplugDecoded(msg.payload, sp) : decodeBytes(msg.payload);
   return msg._decoded;
+}
+
+function sparkplugDecoded(bytes, sp) {
+  const text = JSON.stringify(sp.value, null, 2);
+  return { kind: 'json', text, value: sp.value, size: bytes.length, sparkplug: sp.topic.type, _pretty: text, _unsafe: false };
 }
 
 export function decodeBytes(bytes) {
@@ -55,7 +65,10 @@ const PREVIEW_CHARS = 1000;
 // Short one-line summary of a payload for lists. Only looks at the first few
 // KB so huge payloads never get fully decoded or parsed just to draw a row.
 export function preview(msg, max = 160) {
-  if (msg._preview === undefined) msg._preview = makePreview(msg.payload);
+  if (msg._preview === undefined) {
+    const d = msg.topic && msg.topic.startsWith('spBv1.0/') ? decode(msg) : null;
+    msg._preview = d && d.sparkplug ? summary(d.sparkplug, d.value, PREVIEW_CHARS) : makePreview(msg.payload);
+  }
   return msg._preview.length > max ? msg._preview.slice(0, max) : msg._preview;
 }
 
@@ -86,8 +99,12 @@ export function searchableText(msg) {
 
 // The message as received, without the caches above (and hasNumbers' in
 // fields.js): what goes to another window.
+// spAliases (Sparkplug alias names from the BIRTH) is kept: it is part of
+// what the message means, not a cache.
 export function plainMessage(m) {
-  return { topic: m.topic, payload: m.payload, qos: m.qos, retain: m.retain, ts: m.ts, props: m.props };
+  const out = { topic: m.topic, payload: m.payload, qos: m.qos, retain: m.retain, ts: m.ts, props: m.props };
+  if (m.spAliases) out.spAliases = m.spAliases;
+  return out;
 }
 
 export function formatBytes(n) {

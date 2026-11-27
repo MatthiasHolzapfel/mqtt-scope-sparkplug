@@ -5,7 +5,8 @@
 
 const path = require('node:path');
 
-const REPO = 'ToRexZ/mqtt-scope';
+// MQTT_Lab updates come from this fork's releases, not from MQTT Scope's.
+const REPO = 'MatthiasHolzapfel/mqtt-scope-sparkplug';
 const LATEST_RELEASE_API = `https://api.github.com/repos/${REPO}/releases/latest`;
 const CHECK_INTERVAL_MS = 6 * 60 * 60 * 1000;
 

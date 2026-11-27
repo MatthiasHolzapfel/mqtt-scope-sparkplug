@@ -60,7 +60,7 @@ describe('panelView', () => {
 
   test('heading, running version and notes', () => {
     const v = panelView(state());
-    assert.equal(v.title, 'MQTT Scope 0.3.1');
+    assert.equal(v.title, 'MQTT_Lab 0.3.1');
     assert.equal(v.current, 'You have 0.3.0');
     assert.equal(v.notes, 'Fixed things');
     assert.equal(v.noNotes, false);
@@ -194,12 +194,12 @@ describe('panelView', () => {
 describe('installingView (the dialog every main window shows while a restart installs)', () => {
   test('title and what happens next, per build', () => {
     assert.deepEqual(installingView(state({ status: 'installing', kind: 'nsis' })), {
-      title: 'Installing MQTT Scope 0.3.1',
-      text: 'MQTT Scope closes now. The installer shows its progress, then MQTT Scope opens again.',
+      title: 'Installing MQTT_Lab 0.3.1',
+      text: 'MQTT_Lab closes now. The installer shows its progress, then MQTT_Lab opens again.',
     });
     assert.deepEqual(installingView(state({ status: 'installing', kind: 'appimage' })), {
-      title: 'Installing MQTT Scope 0.3.1',
-      text: 'MQTT Scope restarts in a moment.',
+      title: 'Installing MQTT_Lab 0.3.1',
+      text: 'MQTT_Lab restarts in a moment.',
     });
   });
 

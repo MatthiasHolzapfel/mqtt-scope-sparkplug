@@ -169,7 +169,7 @@ test('Settings footer: Check for updates, Show log file and Open data folder', a
   await page.locator('#btn-settings').click();
   const dlg = page.locator('.modal.settings');
   const footer = dlg.locator('.settings-footer');
-  await expect(footer.locator('.settings-version')).toHaveText(`MQTT Scope ${VERSION}`);
+  await expect(footer.locator('.settings-version')).toHaveText(`MQTT_Lab ${VERSION}`);
   await expect(footer.locator('button')).toHaveText(['Check for updates', 'Show log file', 'Open data folder']);
 
   await footer.getByRole('button', { name: 'Open data folder' }).click();

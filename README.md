@@ -1,3 +1,11 @@
+> **MQTT_Lab** is a fork of [MQTT Scope](https://github.com/ToRexZ/mqtt-scope)
+> by Victor Risager (MIT license) that adds **Sparkplug B decoding**, including
+> prefixed message types such as `LDDATA`. Installers are on this fork's
+> [Releases](https://github.com/MatthiasHolzapfel/mqtt-scope-sparkplug/releases)
+> page (unsigned: on Windows choose *More info → Run anyway*). The rest of this
+> README is MQTT Scope's; download and update links in it point to the
+> original project.
+
 # MQTT Scope
 
 [![CI](https://github.com/ToRexZ/mqtt-scope/actions/workflows/ci.yml/badge.svg)](https://github.com/ToRexZ/mqtt-scope/actions/workflows/ci.yml)
@@ -72,6 +80,12 @@ saved messages. Runs on Linux, Windows and macOS.
   demand). **Maximize** (F11) gives the inspector the whole window; **Pop out**
   opens a topic in a separate live window.
 - MQTT 5 metadata: content type, response topic, user properties.
+- **Sparkplug B**: payloads on `spBv1.0/…` topics are decoded from protobuf to
+  JSON (`timestamp`, `seq`, `metrics[]` with `name`, `datatype`, `value`), also
+  for prefixed message types such as `LDDATA`. Metrics sent by alias are named
+  from the last BIRTH. Plot a metric by right-clicking its `value`; it is
+  followed by name, e.g. `$.metrics[?(@.name=="temperature_C")].value`. Raw
+  shows the original bytes.
 
 ![Search in a large message](docs/screenshots/search-large-message.png)
 
