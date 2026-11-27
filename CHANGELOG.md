@@ -6,6 +6,20 @@ All notable changes to MQTT Scope. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- **Sparkplug B decoding.** Messages on `spBv1.0/<group>/<type>/<node>[/<device>]`
+  topics are decoded from protobuf and shown as JSON in the Tree, Text and Diff
+  views, searched, and offered in the plot picker. Message types ending in
+  BIRTH, DEATH, DATA or CMD are decoded, including prefixed variants such as
+  `LDDATA`. Metrics are listed with their `name`, so a picked metric is
+  plotted by name and keeps following it when the order changes or a message
+  reports only some metrics. Metrics sent by alias get their names and types
+  from the node's or device's last BIRTH. Floats are shown in their shortest
+  form (36.1, not 36.099998…); 64-bit integers that do not fit a number are
+  kept exact as text. Raw shows the protobuf bytes, *Save* writes them as
+  `.bin`, and loading such a message into the publisher loads it as hex.
+
 ## [0.5.0] - 2026-11-20
 
 ### Added

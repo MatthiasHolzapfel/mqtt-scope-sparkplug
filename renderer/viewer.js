@@ -424,7 +424,7 @@ export class MessageViewer {
       formatDateTime(msg.ts),
       `QoS ${msg.qos}`,
       formatBytes(d.size),
-      d.kind.toUpperCase(),
+      d.sparkplug ? `SPARKPLUG B · ${d.sparkplug}` : d.kind.toUpperCase(),
       idx >= 0 ? `#${idx + 1} of ${src.history.length} kept` : 'evicted from history',
       `${src.messageCount} received`,
     ];
@@ -553,6 +553,11 @@ export class MessageViewer {
 
   renderText(msg, pretty) {
     const d = decode(msg);
+    if (!pretty && d.sparkplug) {
+      this.body.append(el('div', 'placeholder small', 'Sparkplug B payload as received (protobuf). Tree and Text show it decoded.'));
+      this.body.append(el('pre', 'code-plain', hexDump(msg.payload)));
+      return;
+    }
     if (d.kind === 'binary') {
       this.body.append(el('div', 'placeholder small', 'Binary payload — shown as hex'));
       this.body.append(el('pre', 'code-plain', hexDump(msg.payload)));
@@ -721,7 +726,8 @@ export class MessageViewer {
     const msg = this.current();
     if (!msg) return;
     const d = decode(msg);
-    const ext = d.kind === 'json' ? 'json' : d.kind === 'binary' ? 'bin' : 'txt';
+    // Sparkplug is saved as received (protobuf), so not as .json.
+    const ext = d.sparkplug ? 'bin' : d.kind === 'json' ? 'json' : d.kind === 'binary' ? 'bin' : 'txt';
     const name = `${this.source.path.replace(/[^\w.-]+/g, '_')}.${ext}`;
     const saved = await this.api.saveFile(name, msg.payload);
     if (saved) toast(`Saved ${saved}`);

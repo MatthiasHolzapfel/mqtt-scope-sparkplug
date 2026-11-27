@@ -72,6 +72,12 @@ saved messages. Runs on Linux, Windows and macOS.
   demand). **Maximize** (F11) gives the inspector the whole window; **Pop out**
   opens a topic in a separate live window.
 - MQTT 5 metadata: content type, response topic, user properties.
+- **Sparkplug B**: payloads on `spBv1.0/…` topics are decoded from protobuf to
+  JSON (`timestamp`, `seq`, `metrics[]` with `name`, `datatype`, `value`), also
+  for prefixed message types such as `LDDATA`. Metrics sent by alias are named
+  from the last BIRTH. Plot a metric by right-clicking its `value`; it is
+  followed by name, e.g. `$.metrics[?(@.name=="temperature_C")].value`. Raw
+  shows the original bytes.
 
 ![Search in a large message](docs/screenshots/search-large-message.png)
 

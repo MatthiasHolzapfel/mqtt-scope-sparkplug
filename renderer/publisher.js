@@ -267,7 +267,8 @@ export class Publisher {
     // accident would replay it to every client that connects later.
     this.retain.checked = false;
     this.setFollow(false);
-    if (d.kind === 'binary') {
+    // Sparkplug B goes back out as the protobuf it arrived as, not as JSON.
+    if (d.kind === 'binary' || d.sparkplug) {
       this.format.value = 'hex';
       this.payload.value = Array.from(msg.payload, (b) => b.toString(16).padStart(2, '0')).join(' ');
     } else if (d.kind === 'json') {
