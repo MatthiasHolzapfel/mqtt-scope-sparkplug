@@ -1,8 +1,8 @@
 {
   "name": "mqtt-scope",
-  "productName": "MQTT Scope",
-  "version": "0.5.0",
-  "description": "Desktop MQTT client: live auto-subscribed topic tree, large message inspector, live plots and a publisher with saved messages",
+  "productName": "MQTT_Lab",
+  "version": "0.5.1",
+  "description": "MQTT_Lab: desktop MQTT client with Sparkplug B decoding, based on MQTT Scope: live topic tree, message inspector, live plots and a publisher",
   "main": "main/main.js",
   "license": "MIT",
   "scripts": {
@@ -20,14 +20,14 @@
     "verify:package": "node scripts/verify-package.mjs"
   },
   "build": {
-    "appId": "io.github.torexz.mqtt-scope",
-    "productName": "MQTT Scope",
-    "artifactName": "MQTT-Scope-${version}-${os}-${arch}.${ext}",
+    "appId": "io.github.matthiasholzapfel.mqtt-lab",
+    "productName": "MQTT_Lab",
+    "artifactName": "MQTT_Lab-${version}-${os}-${arch}.${ext}",
     "publish": [
       {
         "provider": "github",
-        "owner": "ToRexZ",
-        "repo": "mqtt-scope"
+        "owner": "MatthiasHolzapfel",
+        "repo": "mqtt-scope-sparkplug"
       }
     ],
     "directories": {
@@ -61,7 +61,7 @@
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
       "include": "build/installer.nsh",
-      "artifactName": "MQTT-Scope-${version}-win-${arch}-setup.${ext}"
+      "artifactName": "MQTT_Lab-${version}-win-${arch}-setup.${ext}"
     },
     "mac": {
       "target": [
@@ -72,7 +72,7 @@
       "icon": "build/icon.png"
     },
     "portable": {
-      "artifactName": "MQTT-Scope-${version}-win-${arch}-portable.${ext}"
+      "artifactName": "MQTT_Lab-${version}-win-${arch}-portable.${ext}"
     },
     "electronFuses": {
       "runAsNode": false,

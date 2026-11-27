@@ -318,7 +318,7 @@ function createMainWindow({ bounds = null, restore = null, adopt = false } = {})
     ...placeBounds(bounds, screen.getAllDisplays().map((d) => d.workArea), screen.getPrimaryDisplay().workArea),
     minWidth: 900,
     minHeight: 600,
-    title: 'MQTT Scope',
+    title: 'MQTT_Lab',
     backgroundColor: '#0f1115',
     ...NO_MENU_BAR,
     icon: ICON,
@@ -867,7 +867,7 @@ function buildMenu() {
       about: () =>
         dialog.showMessageBox(focusedMain()?.win, {
           type: 'info',
-          message: `MQTT Scope ${app.getVersion()}`,
+          message: `MQTT_Lab ${app.getVersion()}`,
           detail: `Electron ${process.versions.electron} · Chromium ${process.versions.chrome} · Node ${process.versions.node}\nData: ${app.getPath('userData')}`,
           icon: ICON,
         }),

@@ -3,10 +3,9 @@ name: Website
 # Publishes site/ (plus the README screenshots and the app icon) to GitHub
 # Pages: https://torexz.github.io/mqtt-scope/
 
+# MQTT_Lab: manual only. The site is MQTT Scope's; a push must not try to
+# publish it from this fork.
 on:
-  push:
-    branches: [main]
-    paths: ['site/**', 'docs/screenshots/**', 'build/icon.svg', '.github/workflows/pages.yml']
   workflow_dispatch:
 
 permissions:

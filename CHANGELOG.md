@@ -6,6 +6,23 @@ All notable changes to MQTT Scope. The format follows
 
 ## [Unreleased]
 
+## [0.5.1] - 2026-11-27
+
+First release of **MQTT_Lab**, a fork of MQTT Scope 0.5.0 with Sparkplug B
+decoding.
+
+### Changed
+
+- **Renamed to MQTT_Lab.** It installs as its own app (app ID
+  `io.github.matthiasholzapfel.mqtt-lab`) next to an installed MQTT Scope, with
+  its own settings and connection profiles. Installers are named
+  `MQTT_Lab-<version>-…`.
+- **Updates come from this fork.** The update check and the in-app updater
+  read the releases of `MatthiasHolzapfel/mqtt-scope-sparkplug`, so MQTT_Lab
+  is never replaced by an MQTT Scope release.
+- The Arch Linux (AUR) package and the website of MQTT Scope are not built or
+  published from this fork.
+
 ### Added
 
 - **Sparkplug B decoding.** Messages on `spBv1.0/<group>/<type>/<node>[/<device>]`

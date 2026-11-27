@@ -1,3 +1,11 @@
+> **MQTT_Lab** is a fork of [MQTT Scope](https://github.com/ToRexZ/mqtt-scope)
+> by Victor Risager (MIT license) that adds **Sparkplug B decoding**, including
+> prefixed message types such as `LDDATA`. Installers are on this fork's
+> [Releases](https://github.com/MatthiasHolzapfel/mqtt-scope-sparkplug/releases)
+> page (unsigned: on Windows choose *More info → Run anyway*). The rest of this
+> README is MQTT Scope's; download and update links in it point to the
+> original project.
+
 # MQTT Scope
 
 [![CI](https://github.com/ToRexZ/mqtt-scope/actions/workflows/ci.yml/badge.svg)](https://github.com/ToRexZ/mqtt-scope/actions/workflows/ci.yml)

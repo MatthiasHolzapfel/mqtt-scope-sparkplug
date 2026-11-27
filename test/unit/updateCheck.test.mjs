@@ -17,7 +17,7 @@ const {
 
 describe('constants', () => {
   test('values', () => {
-    assert.equal(LATEST_RELEASE_API, 'https://api.github.com/repos/ToRexZ/mqtt-scope/releases/latest');
+    assert.equal(LATEST_RELEASE_API, 'https://api.github.com/repos/MatthiasHolzapfel/mqtt-scope-sparkplug/releases/latest');
     assert.equal(CHECK_INTERVAL_MS, 6 * 60 * 60 * 1000);
     assert.deepEqual([...SELF_UPDATING].sort(), ['appimage', 'nsis']);
   });
@@ -103,7 +103,7 @@ describe('parseRelease', () => {
 
 describe('releasePageUrl', () => {
   test('points at the tag page', () => {
-    assert.equal(releasePageUrl('0.3.1'), 'https://github.com/ToRexZ/mqtt-scope/releases/tag/v0.3.1');
+    assert.equal(releasePageUrl('0.3.1'), 'https://github.com/MatthiasHolzapfel/mqtt-scope-sparkplug/releases/tag/v0.3.1');
   });
 });
 
@@ -112,8 +112,8 @@ describe('pacmanCommand', () => {
     assert.equal(
       pacmanCommand('0.3.1'),
       'mkdir -p ~/.cache/mqtt-scope-pkg/0.3.1 && cd ~/.cache/mqtt-scope-pkg/0.3.1 && ' +
-        'curl -fLO https://github.com/ToRexZ/mqtt-scope/releases/download/v0.3.1/PKGBUILD ' +
-        '-fLO https://github.com/ToRexZ/mqtt-scope/releases/download/v0.3.1/mqtt-scope.desktop && makepkg -sic',
+        'curl -fLO https://github.com/MatthiasHolzapfel/mqtt-scope-sparkplug/releases/download/v0.3.1/PKGBUILD ' +
+        '-fLO https://github.com/MatthiasHolzapfel/mqtt-scope-sparkplug/releases/download/v0.3.1/mqtt-scope.desktop && makepkg -sic',
     );
   });
 });

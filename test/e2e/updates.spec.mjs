@@ -195,7 +195,7 @@ test('openRelease opens the page main builds', async ({ env }) => {
   await tick(app);
   await waitForStatus(page, 'available');
   await page.evaluate(() => window.api.updateOpenRelease());
-  expect(await opened()).toEqual(['https://github.com/ToRexZ/mqtt-scope/releases/tag/v9.9.9']);
+  expect(await opened()).toEqual(['https://github.com/MatthiasHolzapfel/mqtt-scope-sparkplug/releases/tag/v9.9.9']);
 });
 
 test('turning the setting back on checks at once; other settings changes do not', async ({ env }) => {
@@ -343,7 +343,7 @@ test('a broadcast to a closed window does not break the others', async ({ env })
 // ------------------------------------------------------------ top-bar button and panel
 
 const SELF_UPDATING = { MQTTSCOPE_UPDATE_KIND: 'appimage', MQTTSCOPE_UPDATE_FAKE: '1' };
-const releasePage = (version) => `https://github.com/ToRexZ/mqtt-scope/releases/tag/v${version}`;
+const releasePage = (version) => `https://github.com/MatthiasHolzapfel/mqtt-scope-sparkplug/releases/tag/v${version}`;
 
 const updateButton = (page) => page.locator('#btn-update');
 const panel = (page) => page.locator('#update-panel');
@@ -370,7 +370,7 @@ const releaseDownloads = (app) =>
   });
 const installed = (app) => app.evaluate(() => globalThis.__updateInstalled === true);
 
-const installingDialog = (page, version = '9.9.9') => page.getByRole('dialog', { name: `Installing MQTT Scope ${version}`, exact: true });
+const installingDialog = (page, version = '9.9.9') => page.getByRole('dialog', { name: `Installing MQTT_Lab ${version}`, exact: true });
 
 // Records every time the Installing dialog opens or closes.
 async function recordInstalling(page) {
@@ -450,7 +450,7 @@ test('notice: button, panel, Later keeps it, Skip hides it until a newer release
 
   // The panel: versions, notes and this build's actions, without blocking the window.
   await button.click();
-  const dialog = page.getByRole('dialog', { name: 'MQTT Scope 9.9.9' });
+  const dialog = page.getByRole('dialog', { name: 'MQTT_Lab 9.9.9' });
   await expect(dialog).toBeVisible();
   await expect(dialog).toHaveAttribute('aria-modal', 'false');
   await expect(page.locator('.modal-overlay')).toHaveCount(0);
@@ -505,7 +505,7 @@ test('notice: button, panel, Later keeps it, Skip hides it until a newer release
 
   // Settings → Check for updates opens the panel in the window that asked.
   await checkForUpdates(page);
-  await expect(page.getByRole('dialog', { name: 'MQTT Scope 9.9.10' })).toBeVisible();
+  await expect(page.getByRole('dialog', { name: 'MQTT_Lab 9.9.10' })).toBeVisible();
   await expect(panel(page)).toBeFocused();
   await expect(notes(page)).toHaveText('More fixes');
   expect(errors).toEqual([]);
@@ -664,8 +664,8 @@ test('Restart to update: every window shows the Installing dialog, its bar movin
     const dialog = installingDialog(p);
     await expect(dialog).toBeVisible();
     await expect(dialog).toHaveAttribute('aria-modal', 'true');
-    await expect(dialog).toHaveAccessibleDescription('MQTT Scope closes now. The installer shows its progress, then MQTT Scope opens again.');
-    await expect(dialog.getByRole('progressbar', { name: 'Installing MQTT Scope 9.9.9' })).toBeVisible();
+    await expect(dialog).toHaveAccessibleDescription('MQTT_Lab closes now. The installer shows its progress, then MQTT_Lab opens again.');
+    await expect(dialog.getByRole('progressbar', { name: 'Installing MQTT_Lab 9.9.9' })).toBeVisible();
     await expect(dialog.getByRole('button')).toHaveCount(0); // it cannot be stopped
     await expect(dialog).toBeFocused();
     await expect(updateButton(p)).toHaveText('Installing…');
@@ -788,7 +788,7 @@ test('AppImage: the Installing dialog says the app restarts', async ({ env }) =>
   await page.evaluate(() => window.api.updateDownload());
   await expect(updateButton(page)).toHaveText('Restart to update');
   await updateButton(page).click();
-  await expect(installingDialog(page)).toHaveAccessibleDescription('MQTT Scope restarts in a moment.');
+  await expect(installingDialog(page)).toHaveAccessibleDescription('MQTT_Lab restarts in a moment.');
   expect(errors).toEqual([]);
 });
 
@@ -858,7 +858,7 @@ test('release notes are shown as text', async ({ env }) => {
   // A release without notes says so.
   server.setRelease(release('9.9.10', ''));
   await tick(app);
-  await expect(page.getByRole('dialog', { name: 'MQTT Scope 9.9.10' })).toBeVisible();
+  await expect(page.getByRole('dialog', { name: 'MQTT_Lab 9.9.10' })).toBeVisible();
   await expect(notes(page)).toHaveText('No release notes.');
   expect(errors).toEqual([]);
 });
@@ -1104,7 +1104,7 @@ test('Settings → Check for updates: a newer version closes an unchanged dialog
   await page.locator('#btn-settings').click();
   await checkButton(page).click();
   await expect(settingsDialog(page)).toHaveCount(0);
-  await expect(page.getByRole('dialog', { name: 'MQTT Scope 9.9.9' })).toBeVisible();
+  await expect(page.getByRole('dialog', { name: 'MQTT_Lab 9.9.9' })).toBeVisible();
   await expect(notes(page)).toHaveText('Fresh notes');
   expect(errors).toEqual([]);
 });
@@ -1118,7 +1118,7 @@ test('Settings → Check for updates: with unsaved edits a newer version is a to
   await page.locator('#btn-settings').click();
   await settingsDialog(page).locator('[name="historyLimit"]').fill('7');
   await checkButton(page).click();
-  const found = toast(page, 'info').filter({ hasText: 'MQTT Scope 9.9.9 is available — the Update button is in the top bar' });
+  const found = toast(page, 'info').filter({ hasText: 'MQTT_Lab 9.9.9 is available — the Update button is in the top bar' });
   await expect(found).toBeVisible();
   expect(await onTop(found)).toBe(true);
   await expect(settingsDialog(page)).toBeVisible();
@@ -1148,7 +1148,7 @@ test('an announced check (the macOS menu item) shows its answer in the window th
 
   server.setRelease(release('9.9.9', 'Menu notes'));
   await announce();
-  await expect(page.getByRole('dialog', { name: 'MQTT Scope 9.9.9' })).toBeVisible();
+  await expect(page.getByRole('dialog', { name: 'MQTT_Lab 9.9.9' })).toBeVisible();
   await expect(notes(page)).toHaveText('Menu notes');
 
   server.setRelease(null); // 503
